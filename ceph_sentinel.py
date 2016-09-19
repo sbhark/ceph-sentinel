@@ -15,6 +15,8 @@ import sys
 ceph_io_log = []
 mandrill_api_key = ""
 email_subject = " Ceph Sentinel"
+from_email = ""
+to_email = ""
 sentinel_data_file = "/home/sentinel_data.json"
 cluster_location = "LAB"
 
@@ -173,11 +175,11 @@ def send_notification(subject, message_content):'
         logger.info("Sending notification via Mandrill")
         mandrill_client = mandrill.Mandrill(mandrill_api_key)
         message = {
-                'from_email': 'support@offsitedatasync.com',
+                'from_email': from_email,
                 'subject': subject,
                 'text': message_content,
                 'to': [
-                    {'email':'sbhark@offsitedatasync.com',
+                    {'email': to_email,
                     'type': 'to'}]
             }
         message_sent = mandrill_client.messages.send(message=message)
